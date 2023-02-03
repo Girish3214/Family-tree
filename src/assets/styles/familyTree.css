@@ -1,0 +1,28 @@
+.family_tree_container {
+  overflow: scroll;
+  max-height: 21rem;
+}
+
+.family_tree_container::-webkit-scrollbar {
+  display: none;
+}
+.parent {
+  align-items: flex-start;
+  justify-content: flex-start;
+  display: flex;
+  cursor: pointer;
+}
+
+.parent > span,
+.child > span {
+  margin-left: 8px;
+}
+
+.child {
+  margin-left: 24px;
+  cursor: pointer;
+}
+
+.lists {
+  padding: 2px 16px !important;
+}
