@@ -83,7 +83,7 @@ const Search = () => {
               id="Search"
               value={searchValue}
               onChange={(e) => handleChange(e)}
-              sx={{ m: 1, width: "25ch" }}
+              sx={{ m: 1, width: "93%" }}
               size="small"
               {...params}
               InputProps={{

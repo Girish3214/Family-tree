@@ -6,6 +6,8 @@ import CustomPaper from "../../customComponents/CustomPaper";
 import DialogForm from "./DialogForm";
 import { addMemberToFamily } from "../../store/slices/familySlice";
 import { useDispatch, useSelector } from "react-redux";
+import { printPdf } from "../../store/functions/memberActions";
+import PrintFamilyTree from "./PrintFamilyTree";
 
 const initalValue = {
   name: "",
@@ -66,30 +68,30 @@ const ImportExport = () => {
         addAction={addToFamily}
       />
       <Grid container>
-        <Grid item xs={5} margin={1}>
-          <Button variant="outlined" style={{ padding: "8px", fontSize: 12 }}>
-            Import JSON
-          </Button>
-        </Grid>
-        <Grid item xs={5} margin={1}>
+        <Grid item xs={12} margin={1}>
           <Button
             variant="outlined"
-            style={{ padding: "8px", fontSize: 12 }}
+            style={{ padding: "8px", fontSize: 12, width: "100%" }}
             onClick={() => setOpen(true)}
             disabled={!selectedPerson?.isParent}
           >
             Add Family
           </Button>
         </Grid>
-        <Grid item xs={5} margin={1}>
-          <Button variant="outlined" style={{ padding: "8px", fontSize: 12 }}>
-            Export JSON
-          </Button>
-        </Grid>
-        <Grid item xs={5} margin={1}>
-          <Button variant="outlined" style={{ padding: "8px", fontSize: 12 }}>
+
+        <Grid item xs={12} margin={1}>
+          <Button
+            variant="contained"
+            style={{ padding: "8px", fontSize: 12, width: "100%" }}
+            onClick={() => printPdf(selectedPerson)}
+            disabled={Object.keys(selectedPerson).length === 0}
+          >
             Print Family Tree
           </Button>
+
+          <div style={{ display: "none" }}>
+            <PrintFamilyTree parent={selectedPerson} />
+          </div>
         </Grid>
       </Grid>
     </CustomPaper>

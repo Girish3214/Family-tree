@@ -5,7 +5,7 @@ import { insertMember, searchNameInFamily } from "../functions/memberActions";
 const familySlice = createSlice({
   name: "family",
   initialState: {
-    selectedPerson: null,
+    selectedPerson: {},
     familyDetails: familyDetailsJS,
     searchedNames: [],
     searchSelectedPerson: {},
@@ -48,10 +48,6 @@ const familySlice = createSlice({
 
     searchSelectedPerson: (state, { payload }) => {
       const { searchedNames } = state;
-      console.log(
-        searchedNames.filter((search) => search.name === payload),
-        payload
-      );
       state.searchSelectedPerson = searchedNames.filter(
         (search) => search.name === payload
       )[0];

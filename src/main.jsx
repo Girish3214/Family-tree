@@ -9,7 +9,7 @@ import App from "./App";
 import { store } from "./store";
 const darkTheme = createTheme({
   palette: {
-    mode: "dark",
+    mode: "light",
   },
 });
 ReactDOM.createRoot(document.getElementById("root")).render(

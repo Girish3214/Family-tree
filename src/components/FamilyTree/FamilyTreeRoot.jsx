@@ -16,12 +16,14 @@ const FamilyTreeRoot = ({ parent }) => {
     !isChild && setExpanded(!expanded);
     dispatch(selectedPerson({ ...selected }));
   };
+  const truncate = (name) =>
+    name?.length > 18 ? name?.substring(0, 18) + "..." : name;
 
   if (!parent?.isParent) {
     return (
       <div className="child" onClick={(e) => handleExpand(e, parent, true)}>
         <span>{expanded ? "📂" : "🗂️"}</span>
-        <span>{parent?.name}</span>
+        <span>{truncate(parent?.name)}</span>
       </div>
     );
   }
@@ -34,9 +36,9 @@ const FamilyTreeRoot = ({ parent }) => {
           <KeyboardArrowRightIcon />
         )}
         <span>{expanded ? "📂" : "🗂️"}</span>
-        <span>{parent.name}</span>
+        <span>{truncate(parent.name)}</span>
       </div>
-      <div style={{ display: expanded ? "block" : "none" }}>
+      <div style={{ display: expanded ? "block" : "none", width: "100%" }}>
         {parent.childrens.map((child, index) => (
           <ListItem key={index} className="lists">
             <Collapse in={expanded} timeout="auto" unmountOnExit>
