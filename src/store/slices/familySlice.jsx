@@ -1,26 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import familyDetailsJS from "../../FamilyData";
-
-const insertMember = (familyDetails, selectedPerson, newMember) => {
-  if (selectedPerson?.id === familyDetails?.id && familyDetails?.isParent) {
-    const data = [newMember, ...familyDetails.childrens];
-    return { ...familyDetails, childrens: data };
-  }
-
-  let newData = [];
-  newData = familyDetails.childrens.map((data) => {
-    if (!data.isParent) return data;
-    return insertMember(data, selectedPerson, newMember);
-  });
-
-  return { ...familyDetails, childrens: newData };
-};
+import { insertMember, searchNameInFamily } from "../functions/memberActions";
 
 const familySlice = createSlice({
   name: "family",
   initialState: {
     selectedPerson: null,
     familyDetails: familyDetailsJS,
+    searchedNames: [],
+    searchSelectedPerson: {},
+    isSearched: false,
   },
   reducers: {
     selectedPerson: (state, action) => {
@@ -38,10 +27,45 @@ const familySlice = createSlice({
         newMember
       );
     },
+
+    searchPerson: (state, action) => {
+      const { familyDetails } = state;
+      const { payload } = action;
+      let searchResult = [];
+
+      state.searchedNames = searchNameInFamily(
+        familyDetails,
+        payload,
+        searchResult
+      );
+    },
+
+    clearSearchData: (state) => {
+      state.searchedNames = [];
+      state.searchSelectedPerson = {};
+      state.isSearched = false;
+    },
+
+    searchSelectedPerson: (state, { payload }) => {
+      const { searchedNames } = state;
+      console.log(
+        searchedNames.filter((search) => search.name === payload),
+        payload
+      );
+      state.searchSelectedPerson = searchedNames.filter(
+        (search) => search.name === payload
+      )[0];
+      state.isSearched = true;
+    },
   },
 });
 
-export const { selectedPerson, familyDetails, addMemberToFamily } =
-  familySlice.actions;
+export const {
+  selectedPerson,
+  addMemberToFamily,
+  searchPerson,
+  clearSearchData,
+  searchSelectedPerson,
+} = familySlice.actions;
 
 export { familySlice };

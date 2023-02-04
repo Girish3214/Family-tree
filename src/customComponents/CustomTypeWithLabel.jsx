@@ -32,6 +32,7 @@ const CustomTypeWithLabel = ({ label, value, type }) => {
                         margin={2}
                         alignItems="center"
                         display={"flex"}
+                        height="165px"
                         justifyContent="center"
                       >
                         <img src={photo} alt="img" className="photo" />

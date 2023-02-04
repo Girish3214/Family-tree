@@ -15,6 +15,16 @@ const initalValue = {
   address: "",
   isParent: false,
 };
+
+const getUniqueId = () => {
+  return Math.floor(
+    new Date().getTime() +
+      new Date().getMilliseconds() +
+      new Date().getSeconds() +
+      Math.random() +
+      10
+  );
+};
 const ImportExport = () => {
   const dispatch = useDispatch();
   const { familyDetails, selectedPerson } = useSelector(
@@ -33,21 +43,15 @@ const ImportExport = () => {
   };
 
   const addToFamily = () => {
-    setOpen(false);
     const newData = {
-      id: Math.floor(
-        new Date().getTime() +
-          new Date().getMilliseconds() +
-          new Date().getSeconds() +
-          Math.random() +
-          10
-      ),
+      id: getUniqueId(),
       ...newMember,
     };
     if (newMember.isParent) {
       newData.childrens = [];
     }
     dispatch(addMemberToFamily({ familyDetails, newMember: newData }));
+    setOpen(false);
     setNewMember(initalValue);
   };
   return (

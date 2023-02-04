@@ -1,33 +1,116 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import SearchIcon from "@mui/icons-material/Search";
-import { IconButton, InputAdornment, TextField } from "@mui/material";
+import {
+  Alert,
+  Autocomplete,
+  ClickAwayListener,
+  IconButton,
+  InputAdornment,
+  Snackbar,
+  TextField,
+} from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  clearSearchData,
+  searchPerson,
+  searchSelectedPerson,
+} from "../../store/slices/familySlice";
+import { Stack } from "@mui/system";
 
 const Search = () => {
+  const dispatch = useDispatch();
+
+  const { searchedNames } = useSelector((state) => state.family);
   const [searchValue, setSearchValue] = useState("");
+  const [searchedArray, setSearchedArray] = useState(searchedNames);
+  const [alertOpen, setAlertOpen] = useState(false);
 
   const handleSearch = (e) => {
-    setSearchValue(e.target.value);
+    dispatch(searchPerson(searchValue));
   };
+
+  const handleChange = (e) => {
+    setSearchValue(e.target.value);
+    dispatch(searchPerson(e.target.value));
+    if (e.target.value === "") {
+      setSearchedArray([]);
+      dispatch(clearSearchData());
+    }
+  };
+
+  const searchSelected = (newValue) => {
+    setSearchValue(newValue);
+    dispatch(searchSelectedPerson(newValue));
+  };
+
+  useEffect(() => {
+    setSearchedArray(searchedNames);
+    return () => {};
+  }, [searchedNames]);
+
   return (
     <div>
-      <TextField
-        placeholder="Search..."
-        id="filled-start-adornment"
-        value={searchValue}
-        onChange={(e) => handleSearch(e)}
-        sx={{ m: 1, width: "25ch" }}
-        size="small"
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="start">
-              <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-                <SearchIcon />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
+      <Stack>
+        <Snackbar
+          open={alertOpen}
+          autoHideDuration={3000}
+          onClose={() => setAlertOpen(false)}
+          anchorOrigin={{ vertical: "top", horizontal: "left" }}
+        >
+          <Alert
+            onClose={() => setAlertOpen(false)}
+            severity="error"
+            sx={{ width: "100%" }}
+            variant="filled"
+          >
+            No Data Found. Try with different search value
+          </Alert>
+        </Snackbar>
+      </Stack>
+
+      <ClickAwayListener onClickAway={() => {}}>
+        <Autocomplete
+          freeSolo
+          id="Search"
+          disableClearable
+          options={searchedArray.map((option) => option.name)}
+          onChange={(event, newValue) => searchSelected(newValue)}
+          // onInputChange={(_, newValue) => searchSelected(newValue)}
+          renderInput={(params) => (
+            <TextField
+              placeholder="Search..."
+              id="Search"
+              value={searchValue}
+              onChange={(e) => handleChange(e)}
+              sx={{ m: 1, width: "25ch" }}
+              size="small"
+              {...params}
+              InputProps={{
+                ...params.InputProps,
+                type: "search",
+                endAdornment: (
+                  <InputAdornment position="start">
+                    <IconButton
+                      type="button"
+                      sx={{ p: "10px" }}
+                      aria-label="search"
+                      disabled={searchValue.length === 0}
+                      onClick={
+                        searchedArray.length === 0
+                          ? () => setAlertOpen(true)
+                          : (e) => handleSearch(e)
+                      }
+                    >
+                      <SearchIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          )}
+        />
+      </ClickAwayListener>
     </div>
   );
 };

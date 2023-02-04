@@ -34,7 +34,7 @@ const FamilyDetails = () => {
           />
           <CustomTypeWithLabel
             label={"Birth Year"}
-            value={selectedPerson?.dob ?? "NA"}
+            value={selectedPerson?.yob ?? "NA"}
           />
           <CustomTypeWithLabel
             label={"Present Address"}

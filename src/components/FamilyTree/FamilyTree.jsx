@@ -9,7 +9,9 @@ import Search from "./Search";
 import { useSelector } from "react-redux";
 
 const FamilyTree = () => {
-  const familyDetails = useSelector((state) => state.family.familyDetails);
+  const { familyDetails, searchedNames, searchSelectedPerson } = useSelector(
+    (state) => state.family
+  );
   return (
     <CustomPaper>
       <Card>
@@ -20,9 +22,13 @@ const FamilyTree = () => {
         </CardContent>
         <CardContent
           className="family_tree_container"
-          style={{ padding: 5, minHeight: "17rem", maxHeight: "17rem" }}
+          style={{ padding: 5, minHeight: "16rem", maxHeight: "16rem" }}
         >
-          <FamilyTreeRoot parent={familyDetails} />
+          <FamilyTreeRoot
+            parent={
+              searchedNames.length === 0 ? familyDetails : searchSelectedPerson
+            }
+          />
         </CardContent>
       </Card>
     </CustomPaper>
