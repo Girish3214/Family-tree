@@ -9,36 +9,49 @@ import ImportExport from "./components/ImportExport/ImportExport";
 
 function App() {
   return (
-    <div className="App">
+    <Paper
+      className="App"
+      sx={{
+        backgroundColor: (theme) => {
+          console.log(theme.palette);
+          return theme.palette.grey.A200;
+        },
+        height: "100vh",
+      }}
+    >
       <Box sx={{ flexGrow: 1 }} justifyContent="center">
         <Grid container justifyContent={"center"}>
           <Grid xs={3} item>
             <Grid xs={12} item>
-              <Paper
+              <div
                 style={{
                   padding: 8,
-                  margin: 2,
+                  margin: "2px 4px 8px",
                   minHeight: "26rem",
                   maxHeight: "26rem ",
                 }}
               >
                 <FamilyTree />
-              </Paper>
+              </div>
             </Grid>
             <Grid xs={12} item>
-              <Paper style={{ padding: 8, margin: 2 }}>
-                <ImportExport />
-              </Paper>
+              <ImportExport />
             </Grid>
           </Grid>
-          <Grid xs={6} item marginLeft={5}>
-            <Paper style={{ padding: 8, margin: 2 }}>
-              <FamilyDetails />
-            </Paper>
+          <Grid
+            xs={6}
+            item
+            marginLeft={5}
+            sx={{
+              borderRadius: 8,
+              backgroundColor: (theme) => theme.palette.secondary.main,
+            }}
+          >
+            <FamilyDetails />
           </Grid>
         </Grid>
       </Box>
-    </div>
+    </Paper>
   );
 }
 

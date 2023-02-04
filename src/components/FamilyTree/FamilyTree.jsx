@@ -14,8 +14,19 @@ const FamilyTree = () => {
   );
   return (
     <CustomPaper>
-      <Card>
-        <CardHeader title="Family Tree" classes={{ root: "flexCenter" }} />
+      <Card
+        sx={{
+          backgroundColor: (theme) => theme.palette.grey[200],
+        }}
+      >
+        <CardHeader
+          sx={{
+            backgroundColor: (theme) => theme.palette.primary.light,
+            color: (theme) => theme.palette.text.primary,
+          }}
+          title="Family Details"
+          classes={{ root: "flexCenter" }}
+        />
         <Divider />
         <CardContent className="family_tree_container" style={{ padding: 5 }}>
           <Search />

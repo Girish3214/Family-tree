@@ -67,13 +67,27 @@ const ImportExport = () => {
         handleClose={() => setOpen(false)}
         addAction={addToFamily}
       />
-      <Grid container>
+      <Grid
+        container
+        sx={{
+          backgroundColor: (theme) => theme.palette.grey[200],
+          borderRadius: 2,
+        }}
+      >
         <Grid item xs={12} margin={1}>
           <Button
             variant="outlined"
             style={{ padding: "8px", fontSize: 12, width: "100%" }}
             onClick={() => setOpen(true)}
             disabled={!selectedPerson?.isParent}
+            sx={{
+              borderColor: (theme) => theme.palette.secondary.main,
+              backgroundColor: (theme) => theme.palette.grey[100],
+              color: "secondary.dark",
+              "&:hover": {
+                borderColor: "secondary.dark",
+              },
+            }}
           >
             Add Family
           </Button>
@@ -82,6 +96,12 @@ const ImportExport = () => {
         <Grid item xs={12} margin={1}>
           <Button
             variant="contained"
+            sx={{
+              backgroundColor: (theme) => theme.palette.secondary.main,
+              "&:hover": {
+                backgroundColor: "secondary.dark",
+              },
+            }}
             style={{ padding: "8px", fontSize: 12, width: "100%" }}
             onClick={() => printPdf(selectedPerson)}
             disabled={Object.keys(selectedPerson).length === 0}

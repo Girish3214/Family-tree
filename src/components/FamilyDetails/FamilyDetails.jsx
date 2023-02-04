@@ -16,8 +16,19 @@ const FamilyDetails = () => {
   const { selectedPerson } = useSelector((state) => state.family);
   return (
     <CustomPaper>
-      <Card>
-        <CardHeader title="Family Details" classes={{ root: "flexCenter" }} />
+      <Card
+        sx={{
+          backgroundColor: (theme) => theme.palette.grey[200],
+        }}
+      >
+        <CardHeader
+          sx={{
+            backgroundColor: (theme) => theme.palette.primary.light,
+            color: (theme) => theme.palette.text.primary,
+          }}
+          title="Family Details"
+          classes={{ root: "flexCenter" }}
+        />
         <Divider />
         <CardContent>
           <CustomTypeWithLabel
