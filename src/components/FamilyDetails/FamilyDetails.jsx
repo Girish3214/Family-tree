@@ -24,7 +24,7 @@ const FamilyDetails = () => {
         <CardHeader
           sx={{
             backgroundColor: (theme) => theme.palette.primary.light,
-            color: (theme) => theme.palette.text.primary,
+            color: "white",
           }}
           title="Family Details"
           classes={{ root: "flexCenter" }}

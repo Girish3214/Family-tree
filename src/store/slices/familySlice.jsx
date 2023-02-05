@@ -47,10 +47,14 @@ const familySlice = createSlice({
     },
 
     searchSelectedPerson: (state, { payload }) => {
-      const { searchedNames } = state;
-      state.searchSelectedPerson = searchedNames.filter(
-        (search) => search.name === payload
-      )[0];
+      const { searchedNames, selectedPerson, searchSelectedPerson } = state;
+      state.searchSelectedPerson = payload
+        ? searchedNames.filter((search) => search.name === payload)[0]
+        : searchSelectedPerson
+        ? searchSelectedPerson
+        : selectedPerson
+        ? selectedPerson
+        : familyDetailsJS;
       state.isSearched = true;
     },
   },

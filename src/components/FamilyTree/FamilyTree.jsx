@@ -22,7 +22,7 @@ const FamilyTree = () => {
         <CardHeader
           sx={{
             backgroundColor: (theme) => theme.palette.primary.light,
-            color: (theme) => theme.palette.text.primary,
+            color: "white",
           }}
           title="Family Details"
           classes={{ root: "flexCenter" }}
@@ -33,7 +33,7 @@ const FamilyTree = () => {
         </CardContent>
         <CardContent
           className="family_tree_container"
-          style={{ padding: 5, minHeight: "16rem", maxHeight: "16rem" }}
+          style={{ padding: 5, minHeight: "17rem", maxHeight: "17rem" }}
         >
           <FamilyTreeRoot
             parent={

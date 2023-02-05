@@ -67,8 +67,18 @@ const DialogForm = ({
           </FormGroup>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={addAction}>Add</Button>
+          <Button
+            sx={{
+              color: (theme) => theme.palette.error.main,
+            }}
+            onClick={handleClose}
+            variant="outlined"
+          >
+            Cancel
+          </Button>
+          <Button onClick={addAction} variant="contained">
+            Add
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

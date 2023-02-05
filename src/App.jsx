@@ -6,6 +6,7 @@ import "./App.css";
 import FamilyTree from "./components/FamilyTree/FamilyTree";
 import FamilyDetails from "./components/FamilyDetails/FamilyDetails";
 import ImportExport from "./components/ImportExport/ImportExport";
+import InstructionsPage from "./components/FamilyDetails/InstructionsPage";
 
 function App() {
   return (
@@ -13,7 +14,6 @@ function App() {
       className="App"
       sx={{
         backgroundColor: (theme) => {
-          console.log(theme.palette);
           return theme.palette.grey.A200;
         },
         height: "100vh",
@@ -25,8 +25,7 @@ function App() {
             <Grid xs={12} item>
               <div
                 style={{
-                  padding: 8,
-                  margin: "2px 4px 8px",
+                  margin: "2px 0px 8px",
                   minHeight: "26rem",
                   maxHeight: "26rem ",
                 }}
@@ -34,7 +33,7 @@ function App() {
                 <FamilyTree />
               </div>
             </Grid>
-            <Grid xs={12} item>
+            <Grid xs={12} item mt={3}>
               <ImportExport />
             </Grid>
           </Grid>
@@ -44,10 +43,19 @@ function App() {
             marginLeft={5}
             sx={{
               borderRadius: 8,
-              backgroundColor: (theme) => theme.palette.secondary.main,
             }}
           >
             <FamilyDetails />
+          </Grid>
+          <Grid
+            container
+            mt={5}
+            sx={{
+              borderRadius: 8,
+            }}
+            justifyContent={"center"}
+          >
+            <InstructionsPage />
           </Grid>
         </Grid>
       </Box>

@@ -6,7 +6,6 @@ const CustomInput = ({ name, value, type, handleChange }) => {
     <>
       <FormHelperText id="dob">{name}</FormHelperText>
       <TextField
-        margin="dense"
         id={name}
         type={type}
         name={name}
@@ -20,6 +19,9 @@ const CustomInput = ({ name, value, type, handleChange }) => {
             e.target.value
           )
         }
+        sx={{
+          marginBottom: 2,
+        }}
       />
     </>
   );

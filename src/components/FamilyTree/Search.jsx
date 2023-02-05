@@ -69,13 +69,14 @@ const Search = () => {
         </Snackbar>
       </Stack>
 
-      <ClickAwayListener onClickAway={() => {}}>
+      <>
         <Autocomplete
           freeSolo
           id="Search"
           disableClearable
           options={searchedArray.map((option) => option.name)}
-          onChange={(event, newValue) => searchSelected(newValue)}
+          onChange={(_, newValue) => searchSelected(newValue)}
+          onBlur={() => dispatch(searchSelectedPerson(null))}
           // onInputChange={(_, newValue) => searchSelected(newValue)}
           renderInput={(params) => (
             <TextField
@@ -110,7 +111,7 @@ const Search = () => {
             />
           )}
         />
-      </ClickAwayListener>
+      </>
     </div>
   );
 };
