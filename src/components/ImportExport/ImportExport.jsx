@@ -110,7 +110,7 @@ const ImportExport = () => {
           </Button>
 
           <div style={{ display: "none" }}>
-            <PrintFamilyTree parent={selectedPerson} />
+            <PrintFamilyTree parent={familyDetails} />
           </div>
         </Grid>
       </Grid>
