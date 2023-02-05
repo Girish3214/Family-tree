@@ -17,15 +17,15 @@ const familySlice = createSlice({
     },
 
     addMemberToFamily: (state, action) => {
-      const { selectedPerson } = state;
+      const { selectedPerson, searchSelectedPerson } = state;
       const { familyDetails, newMember } = action.payload;
 
       // for iterating all the values to add where they belong (tree traversing)
-      state.familyDetails = insertMember(
-        familyDetails,
-        selectedPerson,
-        newMember
-      );
+      const newData = insertMember(familyDetails, selectedPerson, newMember);
+      state.familyDetails = newData;
+      state.searchSelectedPerson = state.isSearched
+        ? newData
+        : searchSelectedPerson;
     },
 
     searchPerson: (state, action) => {
@@ -48,11 +48,12 @@ const familySlice = createSlice({
 
     searchSelectedPerson: (state, { payload }) => {
       const { searchedNames, selectedPerson, searchSelectedPerson } = state;
+      console.log(payload);
       state.searchSelectedPerson = payload
         ? searchedNames.filter((search) => search.name === payload)[0]
-        : searchSelectedPerson
+        : Object.keys(searchSelectedPerson).length !== 0
         ? searchSelectedPerson
-        : selectedPerson
+        : Object.keys(selectedPerson).length !== 0
         ? selectedPerson
         : familyDetailsJS;
       state.isSearched = true;
